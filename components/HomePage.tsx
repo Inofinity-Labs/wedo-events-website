@@ -15,6 +15,7 @@ import { Social } from "@/components/Social";
 import { Toast } from "@/components/Toast";
 import { getAlbums } from "@/lib/albums.server";
 import { getUpcomingEvents } from "@/lib/events";
+import { marqueeItems as buildMarquee } from "@/lib/marquee";
 
 export type HeroVariant = "futuristic" | "classic";
 export type Theme = "glass" | "flat";
@@ -34,7 +35,7 @@ export async function HomePage({ hero, theme, version, rounded }: HomePageProps)
   const now = Date.now();
   const events = (await getUpcomingEvents()).filter((e) => Date.parse(e.startsAt) > now);
   const next = events.find((e) => e.status !== "sold-out") ?? events[0];
-  const marqueeItems = ["Remembered always", ...events.map((e) => `${e.title} — ${e.city}`)];
+  const marqueeItems = buildMarquee(events);
   const albums = await getAlbums();
   const HeroComponent = hero === "classic" ? HeroClassic : Hero;
 
