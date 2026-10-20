@@ -9,6 +9,7 @@ const VERSIONS: { id: VersionId; label: string; href: string }[] = [
   { id: "b", label: "Classic + glass", href: "/classic/" },
   { id: "c", label: "Futuristic, flat", href: "/flat/" },
   { id: "d", label: "Flat, rounded", href: "/rounded/" },
+  { id: "e", label: "Glass + WEDO reveal", href: "/reveal/" },
 ];
 
 /**

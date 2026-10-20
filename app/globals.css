@@ -3237,3 +3237,14 @@ html {
 :is(.theme-glass, .theme-flat) .tabbar__item {
   border-radius: 15px;
 }
+
+/* Version E: the clip-path text must use the same font as the visible WEDO. */
+.hero__wordmark text.hero__wordmark-clip {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 300px;
+}
+.hero__wordmark-collage {
+  /* Bright enough to read as photos, dim enough not to fight the headline and buttons in front. */
+  opacity: 0.62;
+}

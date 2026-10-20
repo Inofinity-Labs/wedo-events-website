@@ -4,7 +4,16 @@ import { NextTicket } from "./hero/NextTicket";
 import { Wordmark } from "./hero/Wordmark";
 import { ArrowRight, ArrowUpRight } from "./icons";
 
-export function Hero({ next, marqueeItems }: { next?: WeDoEvent; marqueeItems: string[] }) {
+export function Hero({
+  next,
+  marqueeItems,
+  reveal = false,
+}: {
+  next?: WeDoEvent;
+  marqueeItems: string[];
+  /** Version E: banner images revealed inside the WEDO letters by the light sweep. */
+  reveal?: boolean;
+}) {
   return (
     <section id="top" className="hero" aria-label="Introduction">
       <HeroStage>
@@ -15,7 +24,7 @@ export function Hero({ next, marqueeItems }: { next?: WeDoEvent; marqueeItems: s
           <span className="hero__beam hero__beam--b" />
           <span className="hero__floor" />
         </div>
-        <Wordmark />
+        <Wordmark reveal={reveal} />
 
         <div className="wrap hero__inner">
           <div className="hero__copy">

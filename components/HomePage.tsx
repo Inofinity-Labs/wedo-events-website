@@ -20,7 +20,7 @@ import { marqueeItems as buildMarquee } from "@/lib/marquee";
 export type HeroVariant = "futuristic" | "classic";
 export type Theme = "glass" | "flat";
 /** Demo version id shown in the review switcher. */
-export type VersionId = "a" | "b" | "c" | "d";
+export type VersionId = "a" | "b" | "c" | "d" | "e";
 
 interface HomePageProps {
   hero: HeroVariant;
@@ -28,16 +28,17 @@ interface HomePageProps {
   version: VersionId;
   /** Rounded corners and pill controls (demo version D). */
   rounded?: boolean;
+  /** Event banners revealed inside the hero's WEDO letters (demo version E). */
+  reveal?: boolean;
 }
 
 /** The full single-page site; demo versions differ only in hero and theme. */
-export async function HomePage({ hero, theme, version, rounded }: HomePageProps) {
+export async function HomePage({ hero, theme, version, rounded, reveal }: HomePageProps) {
   const now = Date.now();
   const events = (await getUpcomingEvents()).filter((e) => Date.parse(e.startsAt) > now);
   const next = events.find((e) => e.status !== "sold-out") ?? events[0];
   const marqueeItems = buildMarquee(events);
   const albums = await getAlbums();
-  const HeroComponent = hero === "classic" ? HeroClassic : Hero;
 
   return (
     <CartProvider>
@@ -54,7 +55,11 @@ export async function HomePage({ hero, theme, version, rounded }: HomePageProps)
 
           <Header />
           <main>
-            <HeroComponent next={next} marqueeItems={marqueeItems} />
+            {hero === "classic" ? (
+              <HeroClassic next={next} marqueeItems={marqueeItems} />
+            ) : (
+              <Hero next={next} marqueeItems={marqueeItems} reveal={reveal} />
+            )}
             <About />
             <EventCalendar events={events} />
             <Concerts />
