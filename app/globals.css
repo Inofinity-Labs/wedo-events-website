@@ -2206,54 +2206,6 @@ img {
 }
 
 /* ───────────────────────── Demo version switcher ───────────────────────── */
-.demo-switcher {
-  position: fixed;
-  left: 16px;
-  bottom: 16px;
-  z-index: 85;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 6px;
-  font-size: 12px;
-  font-weight: 600;
-  background: var(--glass-bg-strong);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
-}
-.demo-switcher__label {
-  padding: 0 8px;
-  color: var(--cyan);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  font-size: 10px;
-}
-.demo-switcher a {
-  padding: 8px 12px;
-  color: var(--white);
-  white-space: nowrap;
-}
-.demo-switcher a:hover {
-  background: var(--glass-hover);
-  color: var(--white);
-}
-.demo-switcher a[aria-current="page"] {
-  background: var(--white);
-  color: var(--navy-800);
-}
-@media (max-width: 560px) {
-  .demo-switcher {
-    left: 8px;
-    right: 8px;
-    bottom: 8px;
-    justify-content: center;
-  }
-  .demo-switcher a {
-    padding: 8px 10px;
-  }
-}
 
 /* ───────────────────────── Hero: next-night ticket ───────────────────────── */
 .ticket {
@@ -3024,26 +2976,6 @@ html {
   .toast {
     bottom: calc(90px + env(safe-area-inset-bottom));
   }
-  .demo-switcher {
-    left: 50%;
-    right: auto;
-    bottom: calc(84px + env(safe-area-inset-bottom));
-    transform: translateX(-50%);
-    width: max-content;
-    max-width: calc(100% - 20px);
-  }
-  .is-demo .footer {
-    padding-bottom: calc(140px + env(safe-area-inset-bottom));
-  }
-}
-@media (max-width: 560px) {
-  .demo-switcher__label {
-    display: none;
-  }
-  .demo-switcher a {
-    padding: 7px 8px;
-    font-size: 11px;
-  }
 }
 
 /* ── Phones & tablets: no header bar; logo sits at the top of the page, cart lives in the tab bar ── */
@@ -3103,16 +3035,6 @@ html {
   line-height: 1;
 }
 
-/* Version D tidy-up for the demo switcher on small screens: show just the letters. */
-@media (max-width: 560px) {
-  .demo-switcher__name {
-    display: none;
-  }
-  .demo-switcher a {
-    min-width: 36px;
-    text-align: center;
-  }
-}
 
 /* ═════════════════════════════════════════════════════════════════════
    Rounded theme (demo version D): soft corners and pill controls.
@@ -3123,7 +3045,7 @@ html {
   --r-sm: 12px;
 }
 .theme-round :is(.btn, .chip, .size, .tag, .product__badge, .poster__year, .cart-count, .justified__tag,
-    .stepper, .toast, .tabbar__badge, .demo-switcher, .demo-switcher a, .live-dot) {
+    .stepper, .toast, .tabbar__badge, .live-dot) {
   border-radius: 999px;
 }
 .theme-round .icon-btn {
@@ -3179,5 +3101,88 @@ html {
   }
   .theme-round .page .rail.event-list > .event-row {
     border-radius: var(--r-lg);
+  }
+}
+
+/* ── Demo version switcher (review builds only): a small collapsed pill ── */
+.demo-switcher {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 85;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 12px;
+}
+.demo-switcher__toggle {
+  padding: 7px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(6, 18, 47, 0.7);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  color: rgba(255, 255, 255, 0.75);
+  font: inherit;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  opacity: 0.55;
+  transition: opacity 0.2s, border-color 0.2s;
+}
+.demo-switcher__toggle strong {
+  color: var(--cyan);
+}
+.demo-switcher:hover .demo-switcher__toggle,
+.demo-switcher[data-open="true"] .demo-switcher__toggle,
+.demo-switcher__toggle:focus-visible {
+  opacity: 1;
+  border-color: var(--cyan);
+}
+.demo-switcher__menu {
+  display: flex;
+  flex-direction: column;
+  min-width: 210px;
+  padding: 4px;
+  background: rgba(10, 26, 64, 0.92);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 16px 40px rgba(2, 8, 26, 0.5);
+  animation: wd-fade 0.15s;
+}
+.demo-switcher__menu a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  color: var(--white);
+  font-weight: 600;
+}
+.demo-switcher__menu a:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--white);
+}
+.demo-switcher__menu a[aria-current="page"] {
+  background: var(--white);
+  color: var(--navy-800);
+}
+.demo-switcher__id {
+  width: 18px;
+  font-weight: 800;
+  color: var(--cyan);
+}
+.demo-switcher__menu a[aria-current="page"] .demo-switcher__id {
+  color: var(--navy-800);
+}
+/* Phones and tablets: top-right corner (empty without the header), clear of the tab bar. */
+@media (max-width: 1079px) {
+  .demo-switcher {
+    left: auto;
+    right: 12px;
+    bottom: auto;
+    top: calc(14px + env(safe-area-inset-top));
+    flex-direction: column;
+    align-items: flex-end;
   }
 }
