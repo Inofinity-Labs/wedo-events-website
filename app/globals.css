@@ -3248,3 +3248,41 @@ html {
   /* Bright enough to read as photos, dim enough not to fight the headline and buttons in front. */
   opacity: 0.62;
 }
+
+/* Tab bar: tucked away on the opening screen, slides up once the visitor scrolls. */
+@media (max-width: 1079px) {
+  .tabbar {
+    transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.3s;
+  }
+  .tabbar[data-shown="false"] {
+    transform: translate(-50%, calc(100% + 24px + env(safe-area-inset-bottom)));
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+/* Phones: no ticket card in the hero; the full-screen stage shows off the WEDO word instead. */
+@media (max-width: 767px) {
+  .hero .ticket {
+    display: none;
+  }
+  .page .hero__stage {
+    min-height: calc(100svh - 58px);
+    align-items: flex-start;
+  }
+  .page .hero__inner {
+    padding-top: clamp(28px, 7vh, 64px);
+  }
+  .page .hero__wordmark {
+    top: auto;
+    bottom: 3%;
+    width: 96vw;
+  }
+  /* The word is the hero's feature on phones, so make it read more clearly. */
+  .hero__wordmark .wm-edge-flood {
+    flood-opacity: 0.3;
+  }
+  .hero__wordmark .wm-fill-top {
+    stop-opacity: 0.22;
+  }
+}

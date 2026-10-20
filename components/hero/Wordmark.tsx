@@ -31,13 +31,13 @@ export function Wordmark({ reveal = false }: { reveal?: boolean }) {
       <svg viewBox="0 0 1000 280" preserveAspectRatio="xMidYMax meet" focusable="false">
         <defs>
           <linearGradient id="wd-wm-fill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stopColor="#01e8ff" stopOpacity="0.1" />
+            <stop className="wm-fill-top" offset="0" stopColor="#01e8ff" stopOpacity="0.1" />
             <stop offset="0.75" stopColor="#01e8ff" stopOpacity="0" />
           </linearGradient>
           <filter id="wd-wm-edge" x="-2%" y="-5%" width="104%" height="110%">
             <feMorphology in="SourceAlpha" operator="dilate" radius="1.1" result="grown" />
             <feComposite in="grown" in2="SourceAlpha" operator="out" result="edge" />
-            <feFlood floodColor="#ffffff" floodOpacity="0.14" />
+            <feFlood className="wm-edge-flood" floodColor="#ffffff" floodOpacity="0.14" />
             <feComposite in2="edge" operator="in" />
           </filter>
           <filter id="wd-wm-glow" x="-2%" y="-5%" width="104%" height="110%">

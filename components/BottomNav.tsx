@@ -16,6 +16,19 @@ const TABS = [
 export function BottomNav() {
   const { count, open } = useCart();
   const [active, setActive] = useState<string | null>(null);
+  // Hidden on the opening screen; slides in once the visitor scrolls down.
+  const [shown, setShown] = useState(false);
+
+  useEffect(() => {
+    const update = () => setShown(window.scrollY > window.innerHeight * 0.35);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
 
   useEffect(() => {
     const sections = TABS.map((t) => document.getElementById(t.id)).filter((el): el is HTMLElement => !!el);
@@ -39,7 +52,7 @@ export function BottomNav() {
   }, []);
 
   return (
-    <nav className="tabbar" aria-label="Sections">
+    <nav className="tabbar" aria-label="Sections" data-shown={shown}>
       {TABS.map(({ id, label, Icon, accent }) => (
         <a
           key={id}
