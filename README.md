@@ -62,3 +62,10 @@ The glass layer in `globals.css` only applies inside `.theme-glass`, which `Home
 bottom-left corner) in `demo-builds/wedo-demo-<date>/` plus a `.zip` of it. Drag the folder onto
 [Netlify Drop](https://app.netlify.com/drop) or import it into Vercel to get a link for the client.
 The demo is a snapshot: rebuild it after changes. `demo-builds/` is git-ignored.
+
+## Hosting (GitHub Pages)
+
+Every push to `main` runs `.github/workflows/pages.yml`, which builds the static demo (all three
+versions + switcher) and deploys it to https://inofinity-labs.github.io/wedo-events-website/.
+`NEXT_PUBLIC_BASE_PATH` (set to `/<repo name>` in the workflow) prefixes every link and image so the
+site works from that sub-path; `lib/image-loader.ts` and `lib/paths.ts` apply it.

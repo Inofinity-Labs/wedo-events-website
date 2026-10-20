@@ -1,3 +1,4 @@
+import { withBase } from "@/lib/paths";
 import type { VersionId } from "./HomePage";
 
 const VERSIONS: { id: VersionId; label: string; href: string }[] = [
@@ -16,7 +17,7 @@ export function DemoSwitcher({ current }: { current: VersionId }) {
     <nav className="demo-switcher" aria-label="Design versions">
       <span className="demo-switcher__label">Demo</span>
       {VERSIONS.map((v) => (
-        <a key={v.id} href={v.href} aria-current={v.id === current ? "page" : undefined}>
+        <a key={v.id} href={withBase(v.href)} aria-current={v.id === current ? "page" : undefined}>
           {v.label}
         </a>
       ))}

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Outfit, Urbanist } from "next/font/google";
 import { SITE } from "@/lib/content";
+import { withBase } from "@/lib/paths";
 import "./globals.css";
 
 const outfit = Outfit({ subsets: ["latin"], weight: ["400", "600", "700", "800"], variable: "--font-outfit" });
@@ -10,11 +11,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
   title: `${SITE.name} — ${SITE.tagline}`,
   description: SITE.description,
-  icons: { icon: "/images/wedo-logo.png" },
+  icons: { icon: withBase("/images/wedo-logo.png") },
   openGraph: {
     title: `${SITE.name} — ${SITE.tagline}`,
     description: SITE.description,
-    images: ["/images/wedo-logo.png"],
+    images: [withBase("/images/wedo-logo.png")],
     type: "website",
   },
 };
