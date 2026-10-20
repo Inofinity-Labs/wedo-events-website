@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import { ArrowUpRight, Bag, Close, Menu } from "./icons";
+import { ArrowUpRight, Bag } from "./icons";
 import { useCart } from "./cart/CartProvider";
 
 const LINKS = [
@@ -14,16 +13,9 @@ const LINKS = [
   { href: "#connect", label: "Connect" },
 ];
 
+/** Top bar. Below 1080px the section links move to the floating BottomNav. */
 export function Header() {
   const { count, open } = useCart();
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  useEffect(() => {
-    if (!menuOpen) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setMenuOpen(false);
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, [menuOpen]);
 
   return (
     <header className="header">
@@ -49,25 +41,7 @@ export function Header() {
         <a href="#coming-up" className="btn btn--gradient tickets-btn">
           Get tickets <ArrowUpRight />
         </a>
-        <button
-          className="menu-btn"
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={menuOpen}
-          aria-controls="mobile-nav"
-          onClick={() => setMenuOpen((o) => !o)}
-        >
-          {menuOpen ? <Close size={20} /> : <Menu size={20} />}
-        </button>
       </div>
-
-      <nav id="mobile-nav" className="wrap mobile-nav" data-open={menuOpen} aria-label="Mobile">
-        {LINKS.map((l, i) => (
-          <a key={l.href} href={l.href} onClick={() => setMenuOpen(false)}>
-            <span>0{i + 1}</span>
-            {l.label}
-          </a>
-        ))}
-      </nav>
     </header>
   );
 }

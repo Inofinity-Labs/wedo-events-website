@@ -434,18 +434,6 @@ img {
   font-weight: 800;
   line-height: 1;
 }
-.menu-btn {
-  display: none;
-  width: 42px;
-  height: 42px;
-  place-items: center;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  cursor: pointer;
-}
-.mobile-nav {
-  display: none;
-}
 
 @media (max-width: 1079px) {
   .header__bar {
@@ -453,32 +441,6 @@ img {
   }
   .nav {
     display: none;
-  }
-  .menu-btn {
-    display: grid;
-  }
-  .mobile-nav[data-open="true"] {
-    display: flex;
-    flex-direction: column;
-    border-top: 1px solid var(--line);
-    padding-block: 8px 20px;
-    animation: wd-fade 0.2s;
-  }
-  .mobile-nav a {
-    color: var(--white);
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 30px;
-    text-transform: uppercase;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--line);
-  }
-  .mobile-nav a span {
-    color: var(--cyan);
-    font-size: 13px;
-    letter-spacing: 0.2em;
-    margin-right: 14px;
-    vertical-align: middle;
   }
 }
 @media (max-width: 560px) {
@@ -1766,26 +1728,7 @@ img {
   }
   .nav a::after {
   }
-  .menu-btn {
-    background: var(--glass-bg);
-    border-color: var(--glass-border);
-  }
-  @media (max-width: 1079px) {
-    .mobile-nav[data-open="true"] {
-      width: calc(100% - 2 * var(--gutter));
-      margin-top: 8px;
-      padding: 6px 20px 14px;
-      background: var(--glass-bg-strong);
-      -webkit-backdrop-filter: var(--glass-blur);
-      backdrop-filter: var(--glass-blur);
-      border: 1px solid var(--glass-border);
-      box-shadow: var(--glass-shadow);
-    }
-    .mobile-nav a:last-child {
-      border-bottom: 0;
-    }
-  }
-
+  
   /* ── Pill controls ── */
   .btn {
     padding-inline: 20px;
@@ -2713,13 +2656,6 @@ img {
   border-color: var(--glass-edge);
   box-shadow: var(--glass-hi), 0 18px 50px rgba(2, 8, 26, 0.35);
 }
-@media (max-width: 1079px) {
-  .theme-glass .mobile-nav[data-open="true"] {
-    background: linear-gradient(145deg, rgba(20, 40, 92, 0.55), rgba(10, 26, 64, 0.45));
-    border-color: var(--glass-edge);
-    box-shadow: var(--glass-hi), 0 18px 50px rgba(2, 8, 26, 0.35);
-  }
-}
 
 /* Buttons */
 :is(.theme-glass, .theme-flat) .btn {
@@ -2739,7 +2675,6 @@ img {
 :is(.theme-glass, .theme-flat) .btn--ghost,
 :is(.theme-glass, .theme-flat) .btn--muted,
 :is(.theme-glass, .theme-flat) .icon-btn,
-:is(.theme-glass, .theme-flat) .menu-btn,
 :is(.theme-glass, .theme-flat) .story__next {
   background: var(--glass-light);
   border-color: var(--glass-edge);
@@ -2751,8 +2686,7 @@ img {
   box-shadow: var(--glass-hi);
 }
 :is(.theme-glass, .theme-flat) .btn--ghost:hover,
-:is(.theme-glass, .theme-flat) .icon-btn:hover,
-:is(.theme-glass, .theme-flat) .menu-btn:hover {
+:is(.theme-glass, .theme-flat) .icon-btn:hover {
   border-color: var(--cyan);
 }
 :is(.theme-glass, .theme-flat) .btn--outline:hover,
@@ -2817,7 +2751,7 @@ html {
   overflow-x: clip;
 }
 .rail-progress,
-.ticket-bar {
+.tabbar {
   display: none;
 }
 
@@ -2997,76 +2931,7 @@ html {
   .story__stage {
     margin: 5%;
   }
-  .footer {
-    padding-bottom: 96px;
-  }
 
-  /* Sticky "next night" bar. */
-  .ticket-bar {
-    display: flex;
-    position: fixed;
-    left: 10px;
-    right: 10px;
-    bottom: calc(10px + env(safe-area-inset-bottom));
-    z-index: 55;
-    align-items: center;
-    gap: 12px;
-    padding: 8px 8px 8px 12px;
-    background: rgba(10, 26, 64, 0.86);
-    -webkit-backdrop-filter: blur(16px) saturate(160%);
-    backdrop-filter: blur(16px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 16px 40px rgba(2, 8, 26, 0.5);
-    transform: translateY(160%);
-    transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
-  }
-  .ticket-bar[data-show="true"] {
-    transform: none;
-  }
-  .is-demo .ticket-bar {
-    bottom: calc(70px + env(safe-area-inset-bottom));
-  }
-  .ticket-bar__date {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-right: 12px;
-    border-right: 1px solid var(--line);
-    line-height: 1;
-  }
-  .ticket-bar__date strong {
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 24px;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-  .ticket-bar__date span {
-    margin-top: 3px;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    color: var(--text-muted);
-  }
-  .ticket-bar__info {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-  .ticket-bar__info strong {
-    font-family: var(--font-display);
-    font-size: 16px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .ticket-bar .btn {
-    padding: 12px 14px;
-  }
   .toast {
     bottom: calc(90px + env(safe-area-inset-bottom));
   }
@@ -3074,5 +2939,105 @@ html {
 @media (max-width: 560px) {
   .page .rail.justified {
     --rail-h: 210px;
+  }
+}
+
+/* ── Floating bottom tab bar (phones & tablets) ── */
+@media (max-width: 1079px) {
+  .tabbar {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    position: fixed;
+    left: 50%;
+    bottom: calc(10px + env(safe-area-inset-bottom));
+    z-index: 50;
+    width: min(calc(100% - 20px), 560px);
+    transform: translateX(-50%);
+    padding: 6px;
+    background: linear-gradient(145deg, rgba(20, 40, 92, 0.72), rgba(10, 26, 64, 0.62));
+    -webkit-backdrop-filter: blur(18px) saturate(170%);
+    backdrop-filter: blur(18px) saturate(170%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 18px 44px rgba(2, 8, 26, 0.55);
+  }
+  .tabbar__item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    min-height: 52px;
+    padding: 6px 2px;
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: color 0.2s, background 0.25s;
+  }
+  .tabbar__item span {
+    white-space: nowrap;
+  }
+  .tabbar__item:hover {
+    color: var(--white);
+  }
+  .tabbar__item[aria-current="location"] {
+    color: var(--white);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  }
+  .tabbar__item[aria-current="location"]::after {
+    content: "";
+    position: absolute;
+    left: 30%;
+    right: 30%;
+    bottom: 3px;
+    height: 2px;
+    background: var(--gradient);
+  }
+  .tabbar__item--accent {
+    color: var(--navy-800);
+    background: var(--gradient);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), 0 8px 22px rgba(1, 232, 255, 0.3);
+  }
+  .tabbar__item--accent:hover,
+  .tabbar__item--accent[aria-current="location"] {
+    color: var(--navy-800);
+    background: var(--gradient);
+    filter: brightness(1.08);
+  }
+  .tabbar__item--accent[aria-current="location"]::after {
+    background: var(--navy-800);
+  }
+
+  /* Keep content and other floating UI clear of the bar. */
+  .footer {
+    padding-bottom: calc(86px + env(safe-area-inset-bottom));
+  }
+  html {
+    scroll-padding-bottom: 90px;
+  }
+  .toast {
+    bottom: calc(90px + env(safe-area-inset-bottom));
+  }
+  .demo-switcher {
+    left: 50%;
+    right: auto;
+    bottom: calc(84px + env(safe-area-inset-bottom));
+    transform: translateX(-50%);
+    width: max-content;
+    max-width: calc(100% - 20px);
+  }
+  .is-demo .footer {
+    padding-bottom: calc(140px + env(safe-area-inset-bottom));
+  }
+}
+@media (max-width: 560px) {
+  .demo-switcher__label {
+    display: none;
+  }
+  .demo-switcher a {
+    padding: 7px 8px;
+    font-size: 11px;
   }
 }

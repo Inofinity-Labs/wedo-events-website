@@ -1,4 +1,5 @@
 import { About } from "@/components/About";
+import { BottomNav } from "@/components/BottomNav";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { CartProvider } from "@/components/cart/CartProvider";
 import { Concerts } from "@/components/Concerts";
@@ -9,7 +10,6 @@ import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { HeroClassic } from "@/components/HeroClassic";
 import { Merch } from "@/components/Merch";
-import { MobileTicketBar } from "@/components/MobileTicketBar";
 import { PhotoAlbum } from "@/components/PhotoAlbum";
 import { Social } from "@/components/Social";
 import { Toast } from "@/components/Toast";
@@ -61,7 +61,7 @@ export async function HomePage({ hero, theme, version }: HomePageProps) {
           </main>
           <Footer />
         </div>
-        {next && <MobileTicketBar event={next} />}
+        <BottomNav />
         <CartDrawer />
         <Toast />
       </div>
