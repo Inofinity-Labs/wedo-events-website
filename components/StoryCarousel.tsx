@@ -1,11 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { shortDate } from "@/lib/format";
 import type { PastEvent } from "@/lib/types";
 
 const INTERVAL = 6000;
+/** Length of the card flip; the image swaps at the halfway point, when the card is edge-on. */
+const FLIP_MS = 800;
 /** Below this, UAT sales data is likely incomplete, so the fan count isn't shown. */
 const MIN_FANS_SHOWN = 300;
 
@@ -28,6 +30,9 @@ export function StoryCarousel({ shows }: { shows: PastEvent[] }) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const [reduced, setReduced] = useState(false);
+  // The photo lags behind `index` so it can change mid-flip.
+  const [shown, setShown] = useState(0);
+  const photoRef = useRef<HTMLDivElement>(null);
   const uid = useId().replace(/:/g, "");
 
   useEffect(() => {
@@ -41,6 +46,26 @@ export function StoryCarousel({ shows }: { shows: PastEvent[] }) {
     }, INTERVAL);
     return () => clearTimeout(t);
   }, [index, paused, reduced, shows.length]);
+
+  useEffect(() => {
+    if (index === shown) return;
+    if (reduced) {
+      setShown(index);
+      return;
+    }
+    // Turn left to edge-on, swap the image, then turn back in from the right.
+    photoRef.current?.animate(
+      [
+        { transform: "rotateY(0deg)" },
+        { transform: "rotateY(-90deg)", offset: 0.5 },
+        { transform: "rotateY(90deg)", offset: 0.5001 },
+        { transform: "rotateY(0deg)" },
+      ],
+      { duration: FLIP_MS, easing: "cubic-bezier(0.45, 0, 0.55, 1)" },
+    );
+    const t = setTimeout(() => setShown(index), FLIP_MS / 2);
+    return () => clearTimeout(t);
+  }, [index, shown, reduced]);
 
   if (shows.length === 0) return null;
   const show = shows[index];
@@ -63,15 +88,15 @@ export function StoryCarousel({ shows }: { shows: PastEvent[] }) {
           <span />
         </div>
 
-        <div className="story__photo">
+        <div className="story__photo" ref={photoRef}>
           {shows.map((s, i) => (
             <Image
               key={s.slug}
               src={s.poster as string}
-              alt={i === index ? `${s.title} ${s.date.slice(0, 4)}` : ""}
+              alt={i === shown ? `${s.title} ${s.date.slice(0, 4)}` : ""}
               fill
               sizes="(max-width: 900px) 80vw, 440px"
-              data-active={i === index}
+              data-active={i === shown}
             />
           ))}
         </div>

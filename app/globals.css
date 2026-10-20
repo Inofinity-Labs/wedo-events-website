@@ -2520,7 +2520,11 @@ img {
   object-fit: cover;
   opacity: 0;
   transform: scale(1.08);
-  transition: opacity 1s ease, transform 6s ease-out;
+  /* Opacity swaps instantly: it happens while the card is edge-on mid-flip. */
+  transition: transform 6s ease-out;
+}
+.story__stage {
+  perspective: 1400px;
 }
 .story__photo img[data-active="true"] {
   opacity: 1;
