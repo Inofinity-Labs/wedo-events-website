@@ -5,6 +5,7 @@ import { colomboParts, lkr } from "@/lib/format";
 import { whatsappLink } from "@/lib/whatsapp";
 import type { EventStatus, WeDoEvent } from "@/lib/types";
 import { ArrowUpRight, Pin } from "./icons";
+import { Rail } from "./Rail";
 import { SectionHead } from "./SectionHead";
 
 const STATUS_LABEL: Record<EventStatus, string> = {
@@ -35,13 +36,13 @@ export function EventCalendar({ events }: { events: WeDoEvent[] }) {
       <div className="wrap">
         <SectionHead id="coming-up-title" index="02" eyebrow="Coming up" title="Nights Ahead" accent="green">
           <div className="filters">
-            <div className="chips" role="group" aria-label="Filter by month">
+            <div className="chips chips--scroll" role="group" aria-label="Filter by month">
               <Chip active={!month} onClick={() => setMonth(null)} label="All dates" />
               {months.map((m) => (
                 <Chip key={m} active={month === m} onClick={() => setMonth(m)} label={m} />
               ))}
             </div>
-            <div className="chips" role="group" aria-label="Filter by city">
+            <div className="chips chips--scroll" role="group" aria-label="Filter by city">
               <Chip small active={!city} onClick={() => setCity(null)} label="All cities" />
               {cities.map((c) => (
                 <Chip small key={c} active={city === c} onClick={() => setCity(c)} label={c} />
@@ -50,7 +51,7 @@ export function EventCalendar({ events }: { events: WeDoEvent[] }) {
           </div>
         </SectionHead>
 
-        <div className="event-list glass">
+        <Rail className="event-list glass" aria-label="Upcoming events">
           {visible.map((e) => (
             <article className="event-row" key={`${e.id}-${month}-${city}`}>
               <div className="event-row__date">
@@ -81,7 +82,7 @@ export function EventCalendar({ events }: { events: WeDoEvent[] }) {
             </article>
           ))}
           {visible.length === 0 && <p className="empty">No events match this filter yet.</p>}
-        </div>
+        </Rail>
         <p className="note">Tickets are sold through TicketsMinistry.</p>
       </div>
     </section>

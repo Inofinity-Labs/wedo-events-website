@@ -6,6 +6,7 @@ import { shortDate } from "@/lib/format";
 import type { AlbumPhoto, MeasuredAlbum } from "@/lib/types";
 import { ImageSlot } from "./ImageSlot";
 import { ArrowLeft, ArrowRight, Close } from "./icons";
+import { Rail } from "./Rail";
 import { SectionHead } from "./SectionHead";
 
 const ALL = "all";
@@ -116,7 +117,7 @@ export function PhotoAlbum({ albums }: { albums: MeasuredAlbum[] }) {
         </div>
 
         {/* Justified rows: each tile keeps its real aspect ratio and rows fill the width. */}
-        <div className="justified" role="tabpanel" aria-label={album?.title ?? "All moments"}>
+        <Rail className="justified" role="tabpanel" aria-label={album?.title ?? "All moments"}>
           {tiles.map((t, i) => {
             const { width, height } = t.photo ?? PLACEHOLDER;
             return (
@@ -136,7 +137,7 @@ export function PhotoAlbum({ albums }: { albums: MeasuredAlbum[] }) {
               </button>
             );
           })}
-        </div>
+        </Rail>
       </div>
 
       {current && viewing !== null && (

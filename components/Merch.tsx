@@ -7,6 +7,7 @@ import type { Product } from "@/lib/types";
 import { useCart } from "./cart/CartProvider";
 import { ImageSlot } from "./ImageSlot";
 import { Plus, WhatsApp } from "./icons";
+import { Rail } from "./Rail";
 import { SectionHead } from "./SectionHead";
 
 export function Merch() {
@@ -16,11 +17,11 @@ export function Merch() {
         <SectionHead id="wear-it-title" index="05" eyebrow="Wear the night" title="The Merch Drop" accent="green">
           <p className="lead">Official WeDo gear. Island-wide delivery, or collect at the merch desk on show night.</p>
         </SectionHead>
-        <div className="products">
+        <Rail className="products" aria-label="Products">
           {PRODUCTS.map((p) => (
             <ProductCard key={p.id} product={p} />
           ))}
-        </div>
+        </Rail>
         <p className="merch-note">
           <WhatsApp />
           Add what you like to the cart, then send the order to us on WhatsApp — we&apos;ll confirm payment and delivery.

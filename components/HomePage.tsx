@@ -9,6 +9,7 @@ import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { HeroClassic } from "@/components/HeroClassic";
 import { Merch } from "@/components/Merch";
+import { MobileTicketBar } from "@/components/MobileTicketBar";
 import { PhotoAlbum } from "@/components/PhotoAlbum";
 import { Social } from "@/components/Social";
 import { Toast } from "@/components/Toast";
@@ -38,7 +39,7 @@ export async function HomePage({ hero, theme, version }: HomePageProps) {
   return (
     <CartProvider>
       {/* The full glass layer applies inside .theme-glass; .theme-flat only gets glass controls. */}
-      <div className={theme === "glass" ? "theme-glass" : "theme-flat"}>
+      <div className={`${theme === "glass" ? "theme-glass" : "theme-flat"}${process.env.NEXT_PUBLIC_DEMO === "1" ? " is-demo" : ""}`}>
         <div className="page">
           {theme === "glass" && (
             <div className="ambient" aria-hidden="true">
@@ -60,6 +61,7 @@ export async function HomePage({ hero, theme, version }: HomePageProps) {
           </main>
           <Footer />
         </div>
+        {next && <MobileTicketBar event={next} />}
         <CartDrawer />
         <Toast />
       </div>

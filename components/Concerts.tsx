@@ -102,7 +102,7 @@ export function Concerts() {
         <div className="past">
           <div className="past__head">
             <h3>Past shows</h3>
-            <div className="chips" role="group" aria-label="Filter past shows by year">
+            <div className="chips chips--scroll" role="group" aria-label="Filter past shows by year">
               <button className="chip chip--sm" aria-pressed={!year} onClick={() => setYear(null)}>
                 All years
               </button>
