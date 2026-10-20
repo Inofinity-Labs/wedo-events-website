@@ -5,6 +5,7 @@ const VERSIONS: { id: VersionId; label: string; href: string }[] = [
   { id: "a", label: "A · Futuristic + glass", href: "/" },
   { id: "b", label: "B · Classic + glass", href: "/classic/" },
   { id: "c", label: "C · Futuristic, flat", href: "/flat/" },
+  { id: "d", label: "D · Flat, rounded", href: "/rounded/" },
 ];
 
 /**
@@ -18,7 +19,8 @@ export function DemoSwitcher({ current }: { current: VersionId }) {
       <span className="demo-switcher__label">Demo</span>
       {VERSIONS.map((v) => (
         <a key={v.id} href={withBase(v.href)} aria-current={v.id === current ? "page" : undefined}>
-          {v.label}
+          <span className="demo-switcher__id">{v.label.slice(0, 1)}</span>
+          <span className="demo-switcher__name">{v.label.slice(1)}</span>
         </a>
       ))}
     </nav>

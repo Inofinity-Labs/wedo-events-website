@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Heart, ImageIcon, Info, PlayCircle, Shirt, TicketIcon } from "./icons";
+import { useCart } from "./cart/CartProvider";
+import { Bag, ImageIcon, Info, PlayCircle, Shirt, TicketIcon } from "./icons";
 
 const TABS = [
   { id: "about", label: "About", Icon: Info },
@@ -9,11 +10,11 @@ const TABS = [
   { id: "the-nights", label: "Nights", Icon: PlayCircle },
   { id: "moments", label: "Moments", Icon: ImageIcon },
   { id: "wear-it", label: "Merch", Icon: Shirt },
-  { id: "connect", label: "Connect", Icon: Heart },
 ];
 
-/** Floating bottom tab bar for phones and tablets; highlights the section in view. */
+/** Floating bottom tab bar for phones and tablets: sections (highlighting the one in view) + cart. */
 export function BottomNav() {
+  const { count, open } = useCart();
   const [active, setActive] = useState<string | null>(null);
 
   useEffect(() => {
@@ -50,6 +51,17 @@ export function BottomNav() {
           <span>{label}</span>
         </a>
       ))}
+      <button className="tabbar__item" onClick={open} aria-label={`Open cart, ${count} items`}>
+        <span className="tabbar__icon">
+          <Bag size={20} />
+          {count > 0 && (
+            <span className="tabbar__badge" aria-hidden="true">
+              {count}
+            </span>
+          )}
+        </span>
+        <span>Cart</span>
+      </button>
     </nav>
   );
 }

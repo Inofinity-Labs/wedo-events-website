@@ -3041,3 +3041,139 @@ html {
     font-size: 11px;
   }
 }
+
+/* ── Phones & tablets: no header bar; logo sits at the top of the page, cart lives in the tab bar ── */
+@media (max-width: 1079px) {
+  .page .header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding-top: env(safe-area-inset-top);
+    background: none;
+    border: 0;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .page .header__bar {
+    background: none;
+    border: 0;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .page .header .cart-btn,
+  .page .header .tickets-btn {
+    display: none;
+  }
+  .theme-flat .hero__stage {
+    padding-top: var(--header-h);
+  }
+}
+/* Zero-specificity reset so the cart <button> matches the link tabs without overriding their styles. */
+:where(button.tabbar__item) {
+  border: 0;
+  background: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+.tabbar__icon {
+  position: relative;
+  display: grid;
+}
+.tabbar__badge {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  display: grid;
+  place-items: center;
+  background: var(--green);
+  color: var(--navy-800);
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+/* Version D tidy-up for the demo switcher on small screens: show just the letters. */
+@media (max-width: 560px) {
+  .demo-switcher__name {
+    display: none;
+  }
+  .demo-switcher a {
+    min-width: 36px;
+    text-align: center;
+  }
+}
+
+/* ═════════════════════════════════════════════════════════════════════
+   Rounded theme (demo version D): soft corners and pill controls.
+   ═════════════════════════════════════════════════════════════════════ */
+.theme-round {
+  --r-lg: 22px;
+  --r-md: 16px;
+  --r-sm: 12px;
+}
+.theme-round :is(.btn, .chip, .size, .tag, .product__badge, .poster__year, .cart-count, .justified__tag,
+    .stepper, .toast, .tabbar__badge, .demo-switcher, .demo-switcher a, .live-dot) {
+  border-radius: 999px;
+}
+.theme-round .icon-btn {
+  border-radius: 50%;
+}
+.theme-round :is(.ticket, .player, .product, .lightbox__img, .chero__media, .tabbar) {
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+.theme-round .ticket {
+  /* Notches must stay visible outside the rounded edge. */
+  overflow: visible;
+}
+.theme-round :is(.poster__img, .album-filter__item, .justified > button, .next-up, .countdown, .tabbar__item,
+    .rail-progress) {
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+.theme-round :is(.ticket__thumb, .album-filter__thumb, .product__img, .slot) {
+  border-radius: var(--r-sm);
+}
+.theme-round .products {
+  gap: 16px;
+  border: 0;
+}
+.theme-round .product {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+.theme-round .product__img {
+  margin: 8px 8px 0;
+}
+.theme-round .event-list {
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+.theme-round .socials {
+  border: 1px solid var(--line);
+  border-top: 2px solid var(--line-strong);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+.theme-round .drawer__panel {
+  border-radius: var(--r-lg) 0 0 var(--r-lg);
+}
+.theme-round .header__bar {
+  border-radius: 0 0 var(--r-md) var(--r-md);
+}
+@media (max-width: 1100px) {
+  .theme-round .page .rail.event-list {
+    border: 0;
+    overflow-x: auto;
+  }
+  .theme-round .page .rail.event-list > .event-row {
+    border-radius: var(--r-lg);
+  }
+}

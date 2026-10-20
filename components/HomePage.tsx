@@ -19,16 +19,18 @@ import { getUpcomingEvents } from "@/lib/events";
 export type HeroVariant = "futuristic" | "classic";
 export type Theme = "glass" | "flat";
 /** Demo version id shown in the review switcher. */
-export type VersionId = "a" | "b" | "c";
+export type VersionId = "a" | "b" | "c" | "d";
 
 interface HomePageProps {
   hero: HeroVariant;
   theme: Theme;
   version: VersionId;
+  /** Rounded corners and pill controls (demo version D). */
+  rounded?: boolean;
 }
 
 /** The full single-page site; demo versions differ only in hero and theme. */
-export async function HomePage({ hero, theme, version }: HomePageProps) {
+export async function HomePage({ hero, theme, version, rounded }: HomePageProps) {
   const now = Date.now();
   const events = (await getUpcomingEvents()).filter((e) => Date.parse(e.startsAt) > now);
   const next = events.find((e) => e.status !== "sold-out") ?? events[0];
@@ -39,7 +41,7 @@ export async function HomePage({ hero, theme, version }: HomePageProps) {
   return (
     <CartProvider>
       {/* The full glass layer applies inside .theme-glass; .theme-flat only gets glass controls. */}
-      <div className={`${theme === "glass" ? "theme-glass" : "theme-flat"}${process.env.NEXT_PUBLIC_DEMO === "1" ? " is-demo" : ""}`}>
+      <div className={`${theme === "glass" ? "theme-glass" : "theme-flat"}${rounded ? " theme-round" : ""}${process.env.NEXT_PUBLIC_DEMO === "1" ? " is-demo" : ""}`}>
         <div className="page">
           {theme === "glass" && (
             <div className="ambient" aria-hidden="true">

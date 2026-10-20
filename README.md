@@ -48,17 +48,18 @@ name/address prompts) and opens `wa.me` with it; the team confirms stock, paymen
 
 ## Client demo build
 
-Three design versions live side by side (same sections, different hero / styling):
+Four design versions live side by side (same sections, different hero / styling):
 
 | Version | Route | Hero | Styling |
 |---|---|---|---|
 | A | `/` | Futuristic: brand ring with cycling posters, stage beams, parallax | Glass |
 | B | `/classic` | Classic: headline + next-up card, latest poster with spinning ring | Glass |
 | C | `/flat` | Futuristic | Flat (no glass) |
+| D | `/rounded` | Futuristic | Flat with rounded corners and pill controls (`.theme-round`) |
 
 The glass layer in `globals.css` only applies inside `.theme-glass`, which `HomePage` adds when `theme="glass"`.
 
-`npm run demo` makes a static, host-anywhere copy of all three (with a small "Demo" switcher in the
+`npm run demo` makes a static, host-anywhere copy of all four (with a small "Demo" switcher in the
 bottom-left corner) in `demo-builds/wedo-demo-<date>/` plus a `.zip` of it. Drag the folder onto
 [Netlify Drop](https://app.netlify.com/drop) or import it into Vercel to get a link for the client.
 The demo is a snapshot: rebuild it after changes. `demo-builds/` is git-ignored.
