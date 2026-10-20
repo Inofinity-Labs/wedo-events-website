@@ -71,7 +71,7 @@ export function EventCalendar({ events }: { events: WeDoEvent[] }) {
                   {e.venue}
                 </span>
                 <span>
-                  {e.city} · Doors {e.doors}
+                  {e.city} · {e.time}
                 </span>
               </div>
               <div className="event-row__status">

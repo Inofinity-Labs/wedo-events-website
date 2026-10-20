@@ -17,7 +17,7 @@ npm run build && npm start   # production
 
 | What | File |
 |---|---|
-| Upcoming events (TicketsMinistry hook-up point) | `lib/events.ts` |
+| Upcoming events (live from TicketsMinistry) | `lib/events.ts` |
 | Recordings, past shows, albums, products, socials, contact | `lib/content.ts` |
 | Brand colours, fonts, all styles | `app/globals.css` (tokens at the top) |
 | WhatsApp order / alert links | `lib/whatsapp.ts`, `components/cart/CartDrawer.tsx` |
@@ -37,9 +37,11 @@ npm run build && npm start   # production
 
 ## TicketsMinistry
 
-`getUpcomingEvents()` in `lib/events.ts` currently returns placeholder events. Replace its body with a
-fetch from the TicketsMinistry API filtered by the WeDo organizer and map the response to `WeDoEvent`
-(`lib/types.ts`). The page revalidates every 5 minutes, and nothing else needs to change.
+Upcoming events are live: `getUpcomingEvents()` in `lib/events.ts` reads the public
+`/api/events` feed, keeps events whose organiser is "WeDo Events", and maps them to `WeDoEvent`
+(title, start time, venue, lowest price, on-sale / sold-out, thumbnail, ticket page link).
+The hero ticket shows the earliest one. If the feed is unreachable the list is empty (no
+placeholder events). Static exports (GitHub Pages) take a snapshot at build time.
 
 ## Merch orders
 

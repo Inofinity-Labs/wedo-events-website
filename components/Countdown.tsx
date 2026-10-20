@@ -35,7 +35,7 @@ export function Countdown({ target }: { target: string }) {
   }
 
   return (
-    <div className="countdown" role="timer" aria-label="Time until doors open">
+    <div className="countdown" role="timer" aria-label="Time until the show starts">
       {cells.map(([v, l]) => (
         <div key={l}>
           <strong>{v}</strong>

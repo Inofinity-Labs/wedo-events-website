@@ -8,8 +8,8 @@ export interface WeDoEvent {
   city: string;
   /** ISO 8601 start time, Sri Lanka local time (+05:30). */
   startsAt: string;
-  /** Human-readable doors time, e.g. "6:00 PM". */
-  doors: string;
+  /** Human-readable start time, e.g. "7:30 PM". */
+  time: string;
   /** Lowest ticket price in LKR, if known. */
   priceFrom?: number;
   status: EventStatus;

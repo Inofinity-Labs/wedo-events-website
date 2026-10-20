@@ -31,7 +31,7 @@ export function NextTicket({ event }: { event: WeDoEvent }) {
           </div>
         </div>
         <p className="ticket__where">
-          {event.venue} · {event.city} · Doors {event.doors}
+          {event.venue} · {event.city} · {event.time}
         </p>
         <Countdown target={event.startsAt} />
       </div>
